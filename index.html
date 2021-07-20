@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App Product Manager</title>
+    <script src="bootstrap.js"></script>
+    <link rel="stylesheet" href="bootstrap.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #productListDisplay {
+            width: 700px;
+
+        }
+
+        #reset {
+            background-color: red;
+        }
+
+        .form-control {
+            width: 700px;
+        }
+
+        #caption-table {
+            background-color: rgb(92, 197, 92)
+        }
+
+        #btn-add {
+            display: block;
+        }
+
+        #reset {
+            display: block;
+        }
+
+        #updateProduct {
+            display: none;
+        }
+
+        .container {
+            display: block;
+            width: 750px;
+            background-color: blanchedalmond;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container" style="display: none;" id="container">
+
+        <label for="productName">Tên sản phẩm:</label>
+        <input class="form-control" placeholder="Nhập tên sản phẩm" name="pwd" id="productName"> 
+        <p>Hãng</p>
+        <select id="chooseCompany" onchange="manuFacturerCompany()">
+            <option>---Chọn---</option>
+            <option value="apple">Apple</option>
+            <option value="samsung">Samsung</option>
+            <option value="sony">Sony</option>
+            <option value="huawei">Huawei</option>
+            <option value="oppo">Oppo</option>
+            <option value="other">Other</option>
+        </select>
+        <p id="tableChooseStorage"></p> <br>
+        <label for="priceOfProduct">Giá</label>
+        <input class="form-control" type="number" id="priceOfProduct"  placeholder="Nhập giá sản phẩm" name="priceOfProduct"> 
+        <label for="photo">Ảnh</label>
+        <input name="photo" class="form-control"  placeholder="link ảnh" type="text" id="choosePhoto"> <br>
+        <button id="btn-add" class="btn btn-success" onclick="addNewProduct()">Thêm sản phẩm</button>
+        <button class="btn btn-light" id="reset" type="reset" onclick="resetAll()">Reset</button>
+        <button class="btn btn-success" id="updateProduct" onclick="updateProduct()">Update</button>
+
+
+        <p>------------------------------------------------------------------------------------------------</p>
+    </div>
+    <div class="container">
+        
+        <table class="table table-hover" id="productListDisplay">
+
+        </table>
+        <button style="display: none;" class="btn btn-danger" onclick = "showAllProduct()" id="showAllProduct">All</button>
+        <button style="display: block;" class="btn btn-success" onclick="btnAddproduct()" id="btnAddproduct"> Thêm sản phẩm</button>
+    </div>
+
+
+
+
+
+
+
+
+
+    <script>
+        function showAllProduct(){
+            document.getElementById("container").style.display = "none";
+            document.getElementById("btnAddproduct").style.display = "block";
+            document.getElementById("showAllProduct").style.display = "none";
+        }
+
+
+        function btnAddproduct() {
+            document.getElementById("container").style.display = "block";
+            document.getElementById("btnAddproduct").style.display = "none";
+            document.getElementById("showAllProduct").style.display = "block";
+
+
+        }
+        function updateProduct() {
+            var productName = document.getElementById("productName").value;
+            var manuFacturer = document.getElementById("chooseCompany").value;
+            var storageVesion = document.getElementById("storage").value;
+            var priceOfProduct = document.getElementById("priceOfProduct").value;
+            var photo = document.getElementById("choosePhoto").value;
+
+            productListName.push(productName);
+
+            productPhoto.push(photo);
+
+            console.log(productPhoto);
+
+            productManuFacturer.push(manuFacturer);
+
+            storage.push(storageVesion);
+
+            productPrice.push(priceOfProduct);
+
+            productListDisplay()
+            document.getElementById("productName").value = '';
+            document.getElementById("priceOfProduct").value = '';
+            document.getElementById("choosePhoto").value = '';
+            document.getElementById("chooseCompany").value = '';
+            document.getElementById("storage").value = '';
+
+            document.getElementById("btn-add").style.display = "block";
+            document.getElementById("reset").style.display = "block";
+            document.getElementById("updateProduct").style.display = "none";
+
+        }
+
+
+
+        function showEditProduct(index) {
+           
+            document.getElementById("btn-add").style.display = "none";
+            document.getElementById("reset").style.display = "none";
+            document.getElementById("updateProduct").style.display = "block";
+            document.getElementById("container").style.display = "block";
+            document.getElementById("productName").value = productListName[index];
+            document.getElementById("chooseCompany").value = productManuFacturer[index];
+            // document.getElementById("storage").value = storage[index];
+            document.getElementById("priceOfProduct").value = productPrice[index];
+            document.getElementById("choosePhoto").value = productPhoto[index];
+           
+
+            productListName.splice(index, 1);
+
+
+            productManuFacturer.splice(index, 1);
+
+
+            storage.splice(index, 1);
+
+
+            productPrice.splice(index, 1);
+
+
+            productPhoto.splice(index, 1);
+
+            productListDisplay()
+
+
+        }
+
+
+
+
+
+        function deleteProduct(index) {
+            productListName.splice(index, 1);
+
+
+            productManuFacturer.splice(index, 1);
+
+
+            storage.splice(index, 1);
+
+
+            productPrice.splice(index, 1);
+
+
+            productPhoto.splice(index, 1);
+
+            productListDisplay()
+
+        }
+
+
+
+        function resetAll() {
+            document.getElementById("productName").value = '';
+            document.getElementById("priceOfProduct").value = '';
+            document.getElementById("choosePhoto").value = '';
+            document.getElementById("chooseCompany").value = '';
+
+        }
+        var productListName = ['iphone X', 'Samsung Note 10plus'];
+        var productPhoto = ['http://www.techrum.vn/chevereto/images/2017/09/13/swfu2.jpg', 'https://cellphones.com.vn/sforum/wp-content/uploads/2019/07/Samsung-Galaxy-Note-10-concept-render-design-Waqar-Khan-2.jpg'];
+        var productManuFacturer = ['Apple', 'Samsung'];
+        var storage = ['32G', '128'];
+        var productPrice = [10000, 20000];
+        productListDisplay()
+
+        function productListDisplay() {
+            var productListDisplay =
+                `
+                         <tr id= "caption-table"> 
+                            <th>Tên Sản phẩm SL ${productListName.length}</th>
+                            <th>Hãng</th>
+                            <th>Dung lượng</th>
+                            <th>Giá</th>
+                            <th colspan ="2">Hành Động</th>
+                            <th>Ảnh</th>
+
+
+                        </tr>
+                         `
+            for (let i = 0; i < productListName.length; i++) {
+                productListDisplay +=
+                    `
+                         <tr>
+                            <th>${productListName[i]}</th>
+                            <th>${productManuFacturer[i]}</th>
+                            <th>${storage[i]}</th>
+                            <th>${productPrice[i]}</th>
+                            <th><button class="btn btn-success" onclick = "showEditProduct(${i})">Edit</button></th>
+                            <th><button class="btn btn-success" onclick = "deleteProduct(${i})">Delete</button></th>
+                            <th> <img src="${productPhoto[i]}" alt="product photo" width="150px" height="120px" class = "img-responsive"></th>
+
+
+                        </tr>
+                         `
+            }
+            document.getElementById("productListDisplay").innerHTML = productListDisplay;
+        }
+
+        function manuFacturerCompany() {
+
+            var manuFacturer = document.getElementById("chooseCompany").value;
+            var tableChooseStorage = document.getElementById("tableChooseStorage");
+
+
+            switch (manuFacturer) {
+                case 'apple':
+                    tableChooseStorage.innerHTML =
+                        `
+                            <p>Storage</p>
+                        <select id = "storage">
+                            <option><--select---</option>
+                            <option value = "32G">32G</option>
+                            <option value = "64G ">64G</option>
+                            <option  value = "128G">128G</option>
+                            <option  value = "256G">256G</option>
+                            <option  value = "512G">512G</option>
+                        </select> <br>
+                        `
+                    break;
+                case 'samsung':
+                    tableChooseStorage.innerHTML =
+                        `
+                            <p>Storage</p>
+                        <select id = "storage">
+                            <option><--select---</option>
+                            <option value = "32G">32G</option>
+                            <option value = "64G ">64G</option>
+                            <option  value = "128G">128G</option>
+                            <option  value = "256G">256G</option>
+                        </select> <br>
+                        `
+                    break;
+                case 'sony':
+                    tableChooseStorage.innerHTML =
+                        `
+                            <p>Storage</p>
+                        <select id = "storage">
+                            <option><--select---</option>
+                            <option value = "32G">32G</option>
+                            <option value = "64G ">64G</option>
+                            <option  value = "128G">128G</option>
+                            <option  value = "256G">256G</option>
+                        </select> <br>
+                        `
+                    break;
+                case 'huawei':
+                    tableChooseStorage.innerHTML =
+                        `
+                            <p>Storage</p>
+                        <select id = "storage">
+                            <option><--select---</option>
+                            <option value = "32G">32G</option>
+                            <option value = "64G ">64G</option>
+                            <option  value = "128G">128G</option>
+                            <option  value = "256G">256G</option>
+                        </select> <br>
+                        `
+                    break;
+                case 'oppo':
+                    tableChooseStorage.innerHTML =
+                        `
+                            <p>Storage</p>
+                        <select id = "Storage">
+                            <option><--select---</option>
+                            <option value = "32G">32G</option>
+                            <option value = "64G ">64G</option>
+                            <option  value = "128G">128G</option>
+                            <option  value = "256G">256G</option>
+                        </select> <br>
+                        `
+                    break;
+
+
+
+                default:
+                    tableChooseStorage.innerHTML =
+                        `
+                        <p> input storage</p>
+                        <input type = "text" id="storage">  
+                        `
+
+                    break;
+            }
+        }
+
+
+
+        function addNewProduct() {
+            var productName = document.getElementById("productName").value;
+            var manuFacturer = document.getElementById("chooseCompany").value;
+            var storageVesion = document.getElementById("storage").value;
+            var priceOfProduct = document.getElementById("priceOfProduct").value;
+            var photo = document.getElementById("choosePhoto").value;
+
+            productListName.push(productName);
+
+            productPhoto.push(photo);
+
+            console.log(productPhoto);
+
+            productManuFacturer.push(manuFacturer);
+
+            storage.push(storageVesion);
+
+            productPrice.push(priceOfProduct);
+
+            productListDisplay()
+            document.getElementById("productName").value = '';
+            document.getElementById("priceOfProduct").value = '';
+            document.getElementById("choosePhoto").value = '';
+            document.getElementById("chooseCompany").value = '';
+            document.getElementById("storage").value = '';
+
+        }
+       
+
+
+
+
+
+
+
+
+    </script>
+
+
+
+
+
+    </div>
+
+
+
+</body>
+
+</html>
