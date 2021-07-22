@@ -8,11 +8,29 @@
     <title>App Product Manager</title>
     <script src="bootstrap.js"></script>
     <link rel="stylesheet" href="bootstrap.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <style>
         * {
-            margin: 0;
-            padding: 0;
+            box-sizing: border-box
         }
+
+
+        /* slide ảnh */
+        .mySlides {
+            display: none;
+        }
+
+
+        h2 {
+            color: yellow;
+        }
+
+
+
+
 
         #productListDisplay {
             width: 700px;
@@ -48,44 +66,129 @@
             width: 750px;
             background-color: blanchedalmond;
         }
+
+        body {
+            background-color: black;
+        }
+
+        span {
+            color: yellow;
+        }
+
+        #caption_product_page {
+            background-color: rgb(243, 169, 8);
+        }
     </style>
 </head>
 
 <body>
-
-    <div class="container" style="display: none;" id="container">
-
-        <label for="productName">Tên sản phẩm:</label>
-        <input class="form-control" placeholder="Nhập tên sản phẩm" name="pwd" id="productName"> 
-        <p>Hãng</p>
-        <select id="chooseCompany" onchange="manuFacturerCompany()">
-            <option>---Chọn---</option>
-            <option value="apple">Apple</option>
-            <option value="samsung">Samsung</option>
-            <option value="sony">Sony</option>
-            <option value="huawei">Huawei</option>
-            <option value="oppo">Oppo</option>
-            <option value="other">Other</option>
-        </select>
-        <p id="tableChooseStorage"></p> <br>
-        <label for="priceOfProduct">Giá</label>
-        <input class="form-control" type="number" id="priceOfProduct"  placeholder="Nhập giá sản phẩm" name="priceOfProduct"> 
-        <label for="photo">Ảnh</label>
-        <input name="photo" class="form-control"  placeholder="link ảnh" type="text" id="choosePhoto"> <br>
-        <button id="btn-add" class="btn btn-success" onclick="addNewProduct()">Thêm sản phẩm</button>
-        <button class="btn btn-light" id="reset" type="reset" onclick="resetAll()">Reset</button>
-        <button class="btn btn-success" id="updateProduct" onclick="updateProduct()">Update</button>
-
-
-        <p>------------------------------------------------------------------------------------------------</p>
+    <div id="banner" class="text-center">
+        <img src="banner.png" alt="">
     </div>
-    <div class="container">
-        
-        <table class="table table-hover" id="productListDisplay">
+    <nav class="navbar navbar-expand-sm bg-warning navbar-dark">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <button onclick="homePage()" class="btn btn-success">HOME</button>
+            </li>
+            <li class="nav-item">
+                <button onclick="displayMenuAddProduct()" class="btn btn-success"
+                    style="margin-left: 1200px;">Add/Edit/Delete</button>
+            </li>
+        </ul>
+    </nav>
+
+
+    <h2 class="w3-center">sản phẩm mới</h2>
+
+    <div class="w3-content w3-display-container">
+        <img class="mySlides" src="s21_thll.jpg" style="width:1000px; height: 300px;">
+        <img class="mySlides" src="thu-thuat-chup-anh-dep-bang-dien-thoai_800x450.jpg"
+            style="width:1000px; height: 300px;">
+        <img class="mySlides" src="top7dt_2.jpg" style="width:1000px; height: 300px;">
+        <img class="mySlides" src="banner.png" style="width:1000px; height: 300px;">
+
+        <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+        <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="text-center" id="displayProductHomePage" style="display: block;">
+        <table class="table table-hover" id="productHomePage">
 
         </table>
-        <button style="display: none;" class="btn btn-danger" onclick = "showAllProduct()" id="showAllProduct">All</button>
-        <button style="display: block;" class="btn btn-success" onclick="btnAddproduct()" id="btnAddproduct"> Thêm sản phẩm</button>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="container-all-product" style="display: block;">
+
+
+        <div class="container" style="display: none;" id="container">
+            <label for="productName">Tên sản phẩm:</label>
+            <input class="form-control" placeholder="Nhập tên sản phẩm" name="pwd" id="productName">
+            <p>Hãng</p>
+            <select id="chooseCompany" onchange="manuFacturerCompany()">
+                <option>---Chọn---</option>
+                <option value="apple">Apple</option>
+                <option value="samsung">Samsung</option>
+                <option value="sony">Sony</option>
+                <option value="huawei">Huawei</option>
+                <option value="oppo">Oppo</option>
+                <option value="other">Other</option>
+            </select>
+            <p id="tableChooseStorage"></p> <br>
+            <label for="priceOfProduct">Giá</label>
+            <input class="form-control" type="number" id="priceOfProduct" placeholder="Nhập giá sản phẩm"
+                name="priceOfProduct">
+            <label for="photo">Ảnh</label>
+            <input name="photo" class="form-control" placeholder="link ảnh" type="text" id="choosePhoto"> <br>
+            <button id="btn-add" class="btn btn-success" onclick="addNewProduct()">Thêm sản phẩm</button>
+            <button class="btn btn-light" id="reset" type="reset" onclick="resetAll()">Reset</button>
+            <button class="btn btn-success" id="updateProduct" onclick="updateProduct()">Update</button>
+
+
+            <p>------------------------------------------------------------------------------------------------</p>
+        </div>
+        <div class="container" style="display: none;" id="productList">
+
+            <table class="table table-hover" id="productListDisplay">
+
+            </table>
+            <button style="display: none;" class="btn btn-danger" onclick="showAllProduct()"
+                id="showAllProduct">All</button>
+            <button style="display: block;" class="btn btn-success" onclick="btnAddproduct()" id="btnAddproduct">
+                Thêm sản phẩm</button>
+        </div>
     </div>
 
 
@@ -97,7 +200,32 @@
 
 
     <script>
-        function showAllProduct(){
+
+
+
+
+
+
+        function homePage() {
+            document.getElementById("container-all-product").style.display = "none";
+            document.getElementById("productList").style.display = "none";
+            document.getElementById("displayProductHomePage").style.display = "block";
+
+
+
+
+        }
+
+        function displayMenuAddProduct() {
+            document.getElementById("container-all-product").style.display = "block";
+            document.getElementById("container").style.display = "block";
+            document.getElementById("productList").style.display = "block";
+            document.getElementById("displayProductHomePage").style.display = "none";
+
+
+
+        }
+        function showAllProduct() {
             document.getElementById("container").style.display = "none";
             document.getElementById("btnAddproduct").style.display = "block";
             document.getElementById("showAllProduct").style.display = "none";
@@ -146,7 +274,7 @@
 
 
         function showEditProduct(index) {
-           
+
             document.getElementById("btn-add").style.display = "none";
             document.getElementById("reset").style.display = "none";
             document.getElementById("updateProduct").style.display = "block";
@@ -156,7 +284,7 @@
             // document.getElementById("storage").value = storage[index];
             document.getElementById("priceOfProduct").value = productPrice[index];
             document.getElementById("choosePhoto").value = productPhoto[index];
-           
+
 
             productListName.splice(index, 1);
 
@@ -214,9 +342,30 @@
         var productManuFacturer = ['Apple', 'Samsung'];
         var storage = ['32G', '128'];
         var productPrice = [10000, 20000];
+        var cart = [];
         productListDisplay()
 
+        function addProdcutToCart(index) {
+            var productBuy = productListName[index];
+            cart.push(productBuy);
+            console.log(cart.length);
+            productListDisplay()
+        }
+
+
+
+
         function productListDisplay() {
+            var productHomePage =
+                `
+            <tr id = "caption_product_page"> 
+                <th colspan ="3">SẢN PHẨM BÁN CHẠY</th>
+                <th>Giỏ Hàng:${cart.length}</th>
+            </tr>
+
+
+            `
+
             var productListDisplay =
                 `
                          <tr id= "caption-table"> 
@@ -245,8 +394,26 @@
 
                         </tr>
                          `
+
+            }
+            for (let j = 0; j < productPhoto.length; j++) {
+                productHomePage +=
+                    `
+                <tr style="text-align: center; color: yellow" >
+                    <th><img onclick = "info_product(${j})" src="${productPhoto[j]}" alt="product photo" width="300px" height="300px" class = "img-responsive"></th>
+                    <th><p id = "nameOfProduc">${productManuFacturer[j]}: ${productListName[j]}</p></th>
+                    <th><p id = "priceOfProduct">Giá: ${productPrice[j]}</p></th>
+                    <th><button onclick = "addProdcutToCart(${j})" class = "btn btn-success">Thêm vào giỏ hàng</button></th>
+                </tr>
+                `
+
             }
             document.getElementById("productListDisplay").innerHTML = productListDisplay;
+            document.getElementById("productHomePage").innerHTML = productHomePage;
+
+
+
+
         }
 
         function manuFacturerCompany() {
@@ -365,7 +532,29 @@
             document.getElementById("storage").value = '';
 
         }
-       
+
+
+
+        var slideIndex = 1;
+        showDivs(slideIndex);
+
+        function plusDivs(n) {
+            showDivs(slideIndex += n);
+        }
+
+        function showDivs(n) {
+            var i;
+            var x = document.getElementsByClassName("mySlides");
+            if (n > x.length) { slideIndex = 1 }
+            if (n < 1) { slideIndex = x.length }
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            x[slideIndex - 1].style.display = "block";
+        }
+
+
+
 
 
 
@@ -380,7 +569,7 @@
 
 
 
-   
+
 
 
 
