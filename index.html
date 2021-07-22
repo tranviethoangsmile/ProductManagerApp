@@ -98,9 +98,10 @@
     </nav>
 
 
-    <h2 class="w3-center">sản phẩm mới</h2>
+   
 
-    <div class="w3-content w3-display-container">
+    <div class="w3-content w3-display-container" id="slidePhotoProduct" style="display: block;" >
+         <h2 class="w3-center">sản phẩm mới</h2>
         <img class="mySlides" src="s21_thll.jpg" style="width:1000px; height: 300px;">
         <img class="mySlides" src="thu-thuat-chup-anh-dep-bang-dien-thoai_800x450.jpg"
             style="width:1000px; height: 300px;">
@@ -168,8 +169,7 @@
             </select>
             <p id="tableChooseStorage"></p> <br>
             <label for="priceOfProduct">Giá</label>
-            <input class="form-control" type="number" id="priceOfProduct" placeholder="Nhập giá sản phẩm"
-                name="priceOfProduct">
+            <input class="form-control" type="number" id="priceOfProduct"  placeholder="Nhập giá sản phẩm" name="priceOfProduct"> 
             <label for="photo">Ảnh</label>
             <input name="photo" class="form-control" placeholder="link ảnh" type="text" id="choosePhoto"> <br>
             <button id="btn-add" class="btn btn-success" onclick="addNewProduct()">Thêm sản phẩm</button>
@@ -210,6 +210,8 @@
             document.getElementById("container-all-product").style.display = "none";
             document.getElementById("productList").style.display = "none";
             document.getElementById("displayProductHomePage").style.display = "block";
+            document.getElementById("slidePhotoProduct").style.display = "block";
+
 
 
 
@@ -221,6 +223,8 @@
             document.getElementById("container").style.display = "block";
             document.getElementById("productList").style.display = "block";
             document.getElementById("displayProductHomePage").style.display = "none";
+            document.getElementById("slidePhotoProduct").style.display = "none";
+
 
 
 
@@ -362,8 +366,6 @@
                 <th colspan ="3">SẢN PHẨM BÁN CHẠY</th>
                 <th>Giỏ Hàng:${cart.length}</th>
             </tr>
-
-
             `
 
             var productListDisplay =
@@ -375,8 +377,6 @@
                             <th>Giá</th>
                             <th colspan ="2">Hành Động</th>
                             <th>Ảnh</th>
-
-
                         </tr>
                          `
             for (let i = 0; i < productListName.length; i++) {
@@ -390,8 +390,6 @@
                             <th><button class="btn btn-success" onclick = "showEditProduct(${i})">Edit</button></th>
                             <th><button class="btn btn-success" onclick = "deleteProduct(${i})">Delete</button></th>
                             <th> <img src="${productPhoto[i]}" alt="product photo" width="150px" height="120px" class = "img-responsive"></th>
-
-
                         </tr>
                          `
 
@@ -401,8 +399,8 @@
                     `
                 <tr style="text-align: center; color: yellow" >
                     <th><img onclick = "info_product(${j})" src="${productPhoto[j]}" alt="product photo" width="300px" height="300px" class = "img-responsive"></th>
-                    <th><p id = "nameOfProduc">${productManuFacturer[j]}: ${productListName[j]}</p></th>
-                    <th><p id = "priceOfProduct">Giá: ${productPrice[j]}</p></th>
+                    <th><p>${productManuFacturer[j]}: ${productListName[j]}</p></th>
+                    <th>Giá: ${productPrice[j]}</p></th>
                     <th><button onclick = "addProdcutToCart(${j})" class = "btn btn-success">Thêm vào giỏ hàng</button></th>
                 </tr>
                 `
