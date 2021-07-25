@@ -78,10 +78,6 @@
         #caption_product_page {
             background-color: rgb(243, 169, 8);
         }
-
-        .nav-item {
-            margin-left: 1200px;
-        }
     </style>
 </head>
 
@@ -91,42 +87,13 @@
     </div>
     <nav class="navbar navbar-expand-sm bg-warning navbar-dark">
         <ul class="navbar-nav">
-            <li class="homePage">
+            <li class="nav-item active">
                 <a href="index.html">HOME</a>
-            </li>
-            <li class="nav-item">
-                <a href="add.html" target="_blank">ADD NEW PRODUCT</a>
-
             </li>
         </ul>
     </nav>
-
-
-
-
-    <div class="w3-content w3-display-container" id="slidePhotoProduct" style="display: block;">
-        <h2 class="w3-center">sản phẩm mới</h2>
-        <img class="mySlides" src="s21_thll.jpg" style="width:1000px; height: 300px;">
-        <img class="mySlides" src="thu-thuat-chup-anh-dep-bang-dien-thoai_800x450.jpg"
-            style="width:1000px; height: 300px;">
-        <img class="mySlides" src="top7dt_2.jpg" style="width:1000px; height: 300px;">
-        <img class="mySlides" src="banner.png" style="width:1000px; height: 300px;">
-
-        <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
-        <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
-    </div>
-
-    <div class="text-center" id="displayProductHomePage" style="display: block;">
-        <table class="table table-hover" id="productHomePage">
-
-        </table>
-
-    </div>
-
-    <div id="container-all-product" style="display: none;">
-
-
-        <div class="container" style="display: none;" id="container">
+    <div id="container-all-product">
+        <div class="container" style="display: block;" id="container">
             <label for="productName">Tên sản phẩm:</label>
             <input class="form-control" placeholder="Nhập tên sản phẩm" name="pwd" id="productName">
             <p>Hãng</p>
@@ -153,7 +120,7 @@
 
             <p>------------------------------------------------------------------------------------------------</p>
         </div>
-        <div class="container" style="display: none;" id="productList">
+        <div class="container" style="display: block;" id="productList">
 
             <table class="table table-hover" id="productListDisplay">
 
@@ -164,7 +131,25 @@
                 Thêm sản phẩm</button>
         </div>
     </div>
+
+
+
+
+
+
+
+
+
     <script>
+        var productListName = ['iphone X', 'Samsung Note 10plus'];
+        var productPhoto = ['http://www.techrum.vn/chevereto/images/2017/09/13/swfu2.jpg', 'https://cellphones.com.vn/sforum/wp-content/uploads/2019/07/Samsung-Galaxy-Note-10-concept-render-design-Waqar-Khan-2.jpg'];
+        var productManuFacturer = ['Apple', 'Samsung'];
+        var storage = ['32G', '128'];
+        var productPrice = [10000, 20000];
+        var cart = [];
+        productListDisplay()
+
+
         function setLocalStorage() {
             localStorage.setItem('productName', JSON.stringify(productListName));
             localStorage.setItem('productPhoto', JSON.stringify(productPhoto));
@@ -184,22 +169,116 @@
         }
 
 
-        function homePage() {
-            document.getElementById("container-all-product").style.display = "none";
-            document.getElementById("productList").style.display = "none";
-            document.getElementById("displayProductHomePage").style.display = "block";
-            document.getElementById("slidePhotoProduct").style.display = "block";
+        function pushToArrayList() {
+            var productName = document.getElementById("productName").value;
+            var manuFacturer = document.getElementById("chooseCompany").value;
+            var storageVesion = document.getElementById("storage").value;
+            var priceOfProduct = document.getElementById("priceOfProduct").value;
+            var photo = document.getElementById("choosePhoto").value;
+
+            productListName.push(productName);
+
+            productPhoto.push(photo);
+
+            productManuFacturer.push(manuFacturer);
+
+            storage.push(storageVesion);
+
+            productPrice.push(priceOfProduct);
 
         }
 
 
-        var productListName = ['iphone X', 'Samsung Note 10plus'];
-        var productPhoto = ['http://www.techrum.vn/chevereto/images/2017/09/13/swfu2.jpg', 'https://cellphones.com.vn/sforum/wp-content/uploads/2019/07/Samsung-Galaxy-Note-10-concept-render-design-Waqar-Khan-2.jpg'];
-        var productManuFacturer = ['Apple', 'Samsung'];
-        var storage = ['32G', '128'];
-        var productPrice = [10000, 20000];
-        var cart = [];
-        productListDisplay()
+        function displayMenuAddProduct() {
+            document.getElementById("container-all-product").style.display = "block";
+            document.getElementById("container").style.display = "block";
+            document.getElementById("productList").style.display = "block";
+
+
+
+
+        }
+        function showAllProduct() {
+            document.getElementById("container").style.display = "none";
+            document.getElementById("btnAddproduct").style.display = "block";
+            document.getElementById("showAllProduct").style.display = "none";
+        }
+
+
+        function btnAddproduct() {
+            document.getElementById("container").style.display = "block";
+            document.getElementById("btnAddproduct").style.display = "none";
+            document.getElementById("showAllProduct").style.display = "block";
+
+
+        }
+        function updateProduct() {
+
+            addNewProduct()
+
+            document.getElementById("btn-add").style.display = "block";
+            document.getElementById("reset").style.display = "block";
+            document.getElementById("updateProduct").style.display = "none";
+
+        }
+
+
+
+        function showEditProduct(index) {
+
+            document.getElementById("btn-add").style.display = "none";
+            document.getElementById("reset").style.display = "none";
+            document.getElementById("updateProduct").style.display = "block";
+            document.getElementById("container").style.display = "block";
+            document.getElementById("productName").value = productListName[index];
+            document.getElementById("chooseCompany").value = productManuFacturer[index];
+            // document.getElementById("storage").value = storage[index];
+            document.getElementById("priceOfProduct").value = productPrice[index];
+            document.getElementById("choosePhoto").value = productPhoto[index];
+
+
+            deleteProduct(index)
+
+
+        }
+
+
+
+
+
+        function deleteProduct(index) {
+            getLocalStorage()
+            productListName.splice(index, 1);
+
+
+            productManuFacturer.splice(index, 1);
+
+
+            storage.splice(index, 1);
+
+
+            productPrice.splice(index, 1);
+
+
+            productPhoto.splice(index, 1);
+            setLocalStorage()
+
+            productListDisplay()
+
+        }
+
+
+
+        function resetAll() {
+            document.getElementById("productName").value = '';
+            document.getElementById("priceOfProduct").value = '';
+            document.getElementById("choosePhoto").value = '';
+            document.getElementById("chooseCompany").value = '';
+            document.getElementById("storage").value = '';
+
+
+        }
+
 
         function addProdcutToCart(index) {
             var productBuy = productListName[index];
@@ -355,6 +434,19 @@
             }
         }
 
+
+
+        function addNewProduct() {
+
+            pushToArrayList()
+            setLocalStorage()
+            resetAll()
+            productListDisplay()
+
+        }
+
+
+
         var slideIndex = 1;
         showDivs(slideIndex);
 
@@ -374,7 +466,23 @@
         }
 
 
+
+
+
+
+
+
+
+
+
     </script>
+
+
+
+
+
+
+
 
 
 </body>
